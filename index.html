@@ -15,11 +15,44 @@
       <img src="./img/moon.png" id="moon" />
       <img src="./img/mountain.png" id="mountain" />
       <img src="./img/road.png" id="road" />
-      <h2 id="text">Astronomia</h2>
+      <h2 id="text">
+        Astronomia
+      </h2>
     </section>
+
+    <div class="container">
+      <div class="glow">
+        <div class="text-container">
+          <span class="text">Astronomia-The Game</span>
+          <br />
+          <div class="playback_controls">
+            <button onclick="playpause()">
+              Play
+            </button>
+            <button onclick="stop()">Stop</button>
+          </div>
+          <br />
+          <div id="seekbar">
+            <input
+              type="range"
+              oninput="setPos(this.value)"
+              id="seek"
+              value="0"
+              max=""
+            />
+          </div>
+          <br />
+        </div>
+      </div>
+    </div>
 
     <div class="dino">
       <canvas></canvas>
+      <p>Click the right mouse button to make your dino jump</p>
+    </div>
+
+    <div class="footer">
+      <footer>Made with <span>❤</span> by Naman Aggarwal</footer>
     </div>
 
     <script type="text/javascript">
