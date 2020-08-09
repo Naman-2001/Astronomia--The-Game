@@ -44,7 +44,7 @@ song.addEventListener("timeupdate", function () {
 
   Animation.prototype = {
     change: function (frame_set, delay = 15) {
-      if (this.frame_set != frame_set) {
+      if (this.frame_set !== frame_set) {
         // If the frame set is different:
 
         this.count = 0; // Reset the count.
@@ -65,7 +65,7 @@ song.addEventListener("timeupdate", function () {
         this.count = 0; // Reset the count.
 
         this.frame_index =
-          this.frame_index == this.frame_set.length - 1
+          this.frame_index === this.frame_set.length - 1
             ? 0
             : this.frame_index + 1;
         this.frame_value = this.frame_set[this.frame_index]; // Change the current frame value.
@@ -88,7 +88,7 @@ song.addEventListener("timeupdate", function () {
 
   Pool.prototype = {
     get: function (parameters) {
-      if (this.pool.length != 0) {
+      if (this.pool.length !== 0) {
         let object = this.pool.pop();
         object.reset(parameters);
         this.objects.push(object);
@@ -100,7 +100,7 @@ song.addEventListener("timeupdate", function () {
     store: function (object) {
       let index = this.objects.indexOf(object);
 
-      if (index != -1) {
+      if (index !== -1) {
         this.pool.push(this.objects.splice(index, 1)[0]);
       }
     },
@@ -181,7 +181,7 @@ song.addEventListener("timeupdate", function () {
       this.x += this.x_velocity;
 
       this.smoke_count++;
-      if (this.smoke_count == this.smoke_delay) {
+      if (this.smoke_count === this.smoke_delay) {
         this.smoke_count = 0;
         this.smoke = true;
       }
@@ -245,7 +245,7 @@ song.addEventListener("timeupdate", function () {
   TarPit.prototype = {
     constructor: TarPit,
 
-    collideObject: function (player) {},
+    collideObject1: function (player) {},
 
     collideObject: function (object) {
       if (
@@ -287,9 +287,11 @@ song.addEventListener("timeupdate", function () {
       event.preventDefault();
 
       let key_state =
-        event.type == "mousedown" || event.type == "touchstart" ? true : false;
+        event.type === "mousedown" || event.type === "touchstart"
+          ? true
+          : false;
 
-      if (controller.state != key_state) controller.active = key_state;
+      if (controller.state !== key_state) controller.active = key_state;
       controller.state = key_state;
     },
   };
@@ -460,7 +462,7 @@ song.addEventListener("timeupdate", function () {
       }
 
       // Draw tint if a meteor is on screen
-      if (game.object_manager.meteor_pool.objects.length != 0) {
+      if (game.object_manager.meteor_pool.objects.length !== 0) {
         this.tint = this.tint < 80 ? this.tint + 1 : 80;
       } else {
         // Reduce tint otherwise
@@ -468,7 +470,7 @@ song.addEventListener("timeupdate", function () {
         this.tint = this.tint > 0 ? this.tint - 2 : 0;
       }
 
-      if (this.tint != 0) {
+      if (this.tint !== 0) {
         // If there is a tint to draw, apply it to the buffer
 
         let image_data = this.buffer.getImageData(
@@ -800,7 +802,7 @@ song.addEventListener("timeupdate", function () {
             game.player.animation.change([10], 15);
           }
 
-          if (game.player.jumping == false) {
+          if (game.player.jumping === false) {
             game.player.animation.change(
               display.tile_sheet.frame_sets[3],
               Math.floor(TILE_SIZE - game.speed)
@@ -822,7 +824,7 @@ song.addEventListener("timeupdate", function () {
           game.speed *= 0.9;
 
           if (
-            game.player.animation.frame_index ==
+            game.player.animation.frame_index ===
             game.player.animation.frame_set.length - 1
           )
             game.reset();
@@ -847,7 +849,7 @@ song.addEventListener("timeupdate", function () {
       spawn: function () {
         this.count++;
 
-        if (this.count == this.delay) {
+        if (this.count === this.delay) {
           this.count = 0;
           this.delay = 100; // + Math.floor(Math.random() * 200 - 10 * game.speed);
 
