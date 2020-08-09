@@ -1,18 +1,9 @@
 // audio player
 
 var song = new Audio();
-// var muted = false;
-// var vol = 1;
 song.type = "audio/mpeg";
 song.src = "astronomia.mp3"; //Audio file source url
 
-// function skip(time) {
-//   if (time == "back") {
-//     song.currentTime = song.currentTime - 5;
-//   } else if (time == "fwd") {
-//     song.currentTime = song.currentTime + 5;
-//   }
-// }
 function playpause() {
   if (!song.paused) {
     song.pause();
@@ -28,23 +19,6 @@ function stop() {
 function setPos(pos) {
   song.currentTime = pos;
 }
-// function mute() {
-//   if (muted) {
-//     song.volume = vol;
-//     muted = false;
-//     document.getElementById("mute").innerHTML =
-//       '<i class="fa fa-volume-up"></i>';
-//   } else {
-//     song.volume = 0;
-//     muted = true;
-//     document.getElementById("mute").innerHTML =
-//       '<i class="fa fa-volume-off"></i>';
-//   }
-// }
-// function setVolume(volume) {
-//   song.volume = volume;
-//   vol = volume;
-// }
 song.addEventListener("timeupdate", function () {
   curtime = parseInt(song.currentTime, 10);
   document.getElementById("seek").max = song.duration;
@@ -69,9 +43,6 @@ song.addEventListener("timeupdate", function () {
   };
 
   Animation.prototype = {
-    /* This changes the current animation frame set. For example, if the current
-    set is [0, 1], and the new set is [2, 3], it changes the set to [2, 3]. It also
-    sets the delay. */
     change: function (frame_set, delay = 15) {
       if (this.frame_set != frame_set) {
         // If the frame set is different:
@@ -92,8 +63,7 @@ song.addEventListener("timeupdate", function () {
         // If enough cycles have passed, we change the frame.
 
         this.count = 0; // Reset the count.
-        /* If the frame index is on the last value in the frame set, reset to 0.
-        If the frame index is not on the last value, just add 1 to it. */
+
         this.frame_index =
           this.frame_index == this.frame_set.length - 1
             ? 0
@@ -110,11 +80,6 @@ song.addEventListener("timeupdate", function () {
     this.x = x;
     this.y = y;
   };
-
-  /* A Pool object manages objects. The objects array holds all objects that are
-  currently in use, and the pool holds objects that are not in use. By storing objects
-  that would otherwise be deleted, we can reuse them instead of creating totally new
-  instances with the new operator. Recycling saves memory. Do it. */
   var Pool = function (object) {
     this.object = object; // The constructor of the object we are pooling.
     this.objects = []; // The array of objects in use.
@@ -122,8 +87,6 @@ song.addEventListener("timeupdate", function () {
   };
 
   Pool.prototype = {
-    /* Get an object from the pool or create a new object. Pool expects objects to
-    have a few basic functions, like reset. */
     get: function (parameters) {
       if (this.pool.length != 0) {
         let object = this.pool.pop();
@@ -165,9 +128,6 @@ song.addEventListener("timeupdate", function () {
     this.y_velocity = -Math.sin(direction) * 3;
   };
 
-  /* All game objects are expected to have collideWorld and CollideObject functions,
-  as well as update and reset functions. If this were a strongly typed language, I
-  would be using a base class called GameObject or something. */
   Meteor.prototype = {
     constructor: Meteor,
 
@@ -722,7 +682,7 @@ song.addEventListener("timeupdate", function () {
         10,
         10,
         10,
-      ],
+      ], ///This map disordered due to prettier of my vscode
 
       /* Takes care of scrolling the background and generating the next column to
       display on the far right of the map. */
@@ -751,9 +711,6 @@ song.addEventListener("timeupdate", function () {
             );
           }
 
-          /* This next part replaces the grass with an appropriate grass tile. I
-          made it a bit more complex than it needed to be, but the tiles actually
-          reconcile their edges with the tile directly to the left. */
           this.map.splice(this.columns * 7, 1);
 
           let right_index = this.columns * 8 - 1;
@@ -794,13 +751,6 @@ song.addEventListener("timeupdate", function () {
       time_step: 1000 / 60, // update rate
 
       loop: function (time_stamp) {
-        /* How easy does this look? This is a fixed step loop with frame dropping.
-        Amazingly it's super simple and only a few lines. This will make your game
-        run at the same speed on all devices. Now that I look at it, I think there
-        may be a better way to implement this because entire frames can be dropped
-        without updating or rendering. Rather than fixing this now, I will just leave it.
-        Ideally, I would utilize the free time and not do both updates and renderings
-        at the same time unless I have to... Another day... This does work fine, though. */
         if (
           time_stamp >=
           game.engine.accumulated_time + game.engine.time_step
@@ -1019,9 +969,7 @@ song.addEventListener("timeupdate", function () {
     },
   };
 
-  ////////////////////
-  //// INITIALIZE ////
-  ////////////////////
+  //Initialize
 
   display.buffer.canvas.height = WORLD_HEIGHT;
   display.buffer.canvas.width = WORLD_WIDTH;
